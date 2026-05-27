@@ -1,0 +1,71 @@
+[
+  {
+    "id": "polytrack",
+    "title": "PolyTrack",
+    "description": "Inspired by TrackMania, PolyTrack is a fast-paced, minimalist arcade racing game. Design your own low-poly tracks, customize your formula racing car, and beat world records in lightning speed drives.",
+    "imageUrl": "https://freewebgames.io/data/image/game/polytrack.jpg",
+    "iframeUrl": "https://smapskajendfjshwbekf-prog.github.io/newcargame/",
+    "mirrors": [
+      { "name": "Primary Server", "url": "https://smapskajendfjshwbekf-prog.github.io/newcargame/" },
+      { "name": "Backup Mirror", "url": "https://fanyatv.github.io/polytrack/" }
+    ],
+    "category": "Racing / Arcade",
+    "controls": "WASD or Arrows to drive, R to instant restart, ESC to pause/menus",
+    "isPlaceholder": false
+  },
+  {
+    "id": "empty_slot_1",
+    "title": "Empty Slot",
+    "description": "This arcade slot is currently unallocated. Suggest your favorite unblocked game and upvote to unlock immediately.",
+    "imageUrl": "",
+    "iframeUrl": "",
+    "mirrors": [],
+    "category": "Unallocated",
+    "controls": "Submit requested game format",
+    "isPlaceholder": true
+  },
+  {
+    "id": "empty_slot_2",
+    "title": "Empty Slot",
+    "description": "This sports slot is currently unallocated. Suggest your favorite unblocked game and upvote to unlock immediately.",
+    "imageUrl": "",
+    "iframeUrl": "",
+    "mirrors": [],
+    "category": "Unallocated",
+    "controls": "Submit requested game format",
+    "isPlaceholder": true
+  },
+  {
+    "id": "empty_slot_3",
+    "title": "Empty Slot",
+    "description": "This logic slot is currently unallocated. Suggest your favorite unblocked game and upvote to unlock immediately.",
+    "imageUrl": "",
+    "iframeUrl": "",
+    "mirrors": [],
+    "category": "Unallocated",
+    "controls": "Submit requested game format",
+    "isPlaceholder": true
+  },
+  {
+    "id": "empty_slot_4",
+    "title": "Empty Slot",
+    "description": "This platformer slot is currently unallocated. Suggest your favorite unblocked game and upvote to unlock immediately.",
+    "imageUrl": "",
+    "iframeUrl": "",
+    "mirrors": [],
+    "category": "Unallocated",
+    "controls": "Submit requested game format",
+    "isPlaceholder": true
+  },
+  {
+    "id": "empty_slot_5",
+    "title": "Empty Slot",
+    "description": "This action slot is currently unallocated. Suggest your favorite unblocked game and upvote to unlock immediately.",
+    "imageUrl": "",
+    "iframeUrl": "",
+    "mirrors": [],
+    "category": "Unallocated",
+    "controls": "Submit requested game format",
+    "isPlaceholder": true
+  }
+]

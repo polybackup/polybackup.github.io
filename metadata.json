@@ -1,0 +1,6 @@
+{
+  "name": "Polybackup",
+  "description": "A minimalistic unblocked games portal featuring PolyTrack and request channels.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
