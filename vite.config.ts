@@ -6,12 +6,16 @@ import {defineConfig} from 'vite';
 // Vite configuration for Polybackup unblocked games arcade
 export default defineConfig(() => {
   return {
-    base: './', // Ensures relative assets loading on GitHub Pages subdomain/root paths
+    base: '/', // Configures correct asset routing from the root path on Vercel
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
       },
+    },
+    build: {
+      outDir: 'dist',
+      emptyOutDir: true,
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.

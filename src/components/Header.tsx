@@ -1,4 +1,4 @@
-import { Compass, FormInput, Home as HomeIcon } from 'lucide-react';
+import { Compass, FormInput, Home as HomeIcon, BarChart3 } from 'lucide-react';
 import { ActiveScreen } from '../types';
 
 interface HeaderProps {
@@ -65,6 +65,18 @@ export default function Header({ activeScreen, setScreen, setSelectedGameId }: H
           >
             <FormInput className="w-3.5 h-3.5" />
             <span>Request</span>
+          </button>
+
+          <button
+            onClick={() => navigateTo('analytics')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer ${
+              activeScreen === 'analytics'
+                ? 'text-brand-blue bg-blue-950/20 border border-blue-900/40 text-glow'
+                : 'text-zinc-400 hover:text-blue-500'
+            }`}
+          >
+            <BarChart3 className="w-3.5 h-3.5" />
+            <span>Admin</span>
           </button>
         </nav>
       </div>

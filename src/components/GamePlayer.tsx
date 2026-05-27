@@ -66,6 +66,30 @@ export default function GamePlayer({ game, onBack }: GamePlayerProps) {
     };
   }, []);
 
+  // Track operational gameplay duration heartbeats
+  useEffect(() => {
+    const trackHeartbeat = () => {
+      const sessionId = sessionStorage.getItem('polybackup_session_id') || 'sess_anonymous';
+      fetch('/api/analytics/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'gameplay_duration',
+          sessionId,
+          data: {
+            gameId: game.id,
+            gameTitle: game.title,
+            addedSeconds: 10
+          }
+        })
+      }).catch(() => {});
+    };
+
+    // Dispatch first incremental heartbeat immediately after 10s
+    const timer = setInterval(trackHeartbeat, 10000);
+    return () => clearInterval(timer);
+  }, [game]);
+
   return (
     <div 
       id="polytrack-player-workspace"

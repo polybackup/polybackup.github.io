@@ -1,13 +1,40 @@
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useEffect } from 'react';
 import Header from './components/Header';
 import Home from './components/Home';
 import GamesPage from './components/GamesPage';
 import GamePlayer from './components/GamePlayer';
 import RequestForm from './components/RequestForm';
+import AnalyticsDashboard from './components/AnalyticsDashboard';
 import { ActiveScreen, Game } from './types';
 
 // Import our games list stored in JSON
 import gamesData from './games.json';
+
+// Global non-blocking analytics dispatcher helper
+export const trackTelemetryEvent = async (type: string, data: any) => {
+  try {
+    let sessionId = sessionStorage.getItem('polybackup_session_id');
+    if (!sessionId) {
+      sessionId = `sess_${Math.random().toString(36).substring(2, 11)}`;
+      sessionStorage.setItem('polybackup_session_id', sessionId);
+    }
+
+    let userId = localStorage.getItem('polybackup_user_id');
+    if (!userId) {
+      userId = `usr_${Math.random().toString(36).substring(2, 11)}`;
+      localStorage.setItem('polybackup_user_id', userId);
+    }
+    
+    await fetch('/api/analytics/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type, data, sessionId, userId })
+    });
+  } catch (error) {
+    // Fail silently in case of network outages or offline tests
+    console.debug('Telemetry logging bypassed.', error);
+  }
+};
 
 export default function App() {
   const [activeScreen, setScreen] = useState<ActiveScreen>('home');
@@ -17,8 +44,32 @@ export default function App() {
   // Cast games list correctly
   const games: Game[] = gamesData as Game[];
 
-  // Select game launcher
+  // Bootstrap session and log initial pageview
+  useEffect(() => {
+    let sessionId = sessionStorage.getItem('polybackup_session_id');
+    if (!sessionId) {
+      sessionId = `sess_${Math.random().toString(36).substring(2, 11)}`;
+      sessionStorage.setItem('polybackup_session_id', sessionId);
+    }
+    trackTelemetryEvent('pageview', { screen: 'init_app' });
+  }, []);
+
+  // Track screen transitions dynamically
+  useEffect(() => {
+    trackTelemetryEvent('pageview', { screen: activeScreen });
+  }, [activeScreen]);
+
+  // Select game launcher with telemetry dispatch
   const handleSelectGame = (gameId: string) => {
+    const selectedGame = games.find(g => g.id === gameId);
+    if (selectedGame) {
+      trackTelemetryEvent('gameplay_start', { 
+        gameId, 
+        gameTitle: selectedGame.title,
+        mirrorUrl: selectedGame.iframeUrl 
+      });
+    }
+
     startTransition(() => {
       setSelectedGameId(gameId);
       setScreen('player');
@@ -68,6 +119,10 @@ export default function App() {
 
         {activeScreen === 'request' && (
           <RequestForm />
+        )}
+
+        {activeScreen === 'analytics' && (
+          <AnalyticsDashboard />
         )}
 
         {activeScreen === 'player' && activeGame ? (
