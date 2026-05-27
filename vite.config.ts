@@ -3,9 +3,10 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
+// Vite configuration for Polybackup unblocked games arcade
 export default defineConfig(() => {
   return {
-    base: './',
+    base: './', // Ensures relative assets loading on GitHub Pages subdomain/root paths
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
