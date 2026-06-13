@@ -14,15 +14,21 @@
     "isPlaceholder": false
   },
   {
-    "id": "empty_slot_1",
-    "title": "Empty Slot",
-    "description": "This arcade slot is currently unallocated. Suggest your favorite unblocked game and upvote to unlock immediately.",
-    "imageUrl": "",
-    "iframeUrl": "",
-    "mirrors": [],
-    "category": "Unallocated",
-    "controls": "Submit requested game format",
-    "isPlaceholder": true
+    "id": "run3",
+    "title": "Run 3",
+    "description": "Run, jump, and drift through an infinite, gravity-defying series of tunnels in outer space. Conquer moving platforms, crumbling tiles, and light-speed gaps in this classic action runner.",
+    "imageUrl": "https://static.keygames.com/7/89667/48385/672x448/run-3.webp",
+    "iframeUrl": "https://script.google.com/macros/s/AKfycbwiwgFaTIgGF_Hexunh2d3yCwl90aBd0iWxT_oqV7pjSaFi3XuMBniddbhIqEAuiBSQfA/exec?appId=run-3",
+    "mirrors": [
+      { "name": "Google Sandbox (Fast)", "url": "https://script.google.com/macros/s/AKfycbwiwgFaTIgGF_Hexunh2d3yCwl90aBd0iWxT_oqV7pjSaFi3XuMBniddbhIqEAuiBSQfA/exec?appId=run-3" },
+      { "name": "Google Sandbox Alt 1", "url": "https://script.google.com/macros/s/AKfycbyPT-YXxEPg_av-B0yJlvR9BSGVsmcaQdFGJl0fDpb6RbuHk6YaepHswQzkl1iNZTAC1Q/exec" },
+      { "name": "Google Sandbox Alt 2", "url": "https://script.google.com/macros/s/AKfycby0NyvZW0TAogOkUh-P5Knwe2PrFhplDyYtRkr7-dM3OxAuqOoHVd44EbhNasboVQy79w/exec" },
+      { "name": "Classroom Unblocked", "url": "https://classroom-google-com.github.io/run-3/" },
+      { "name": "H947 Mirror", "url": "https://h947.github.io/Run-3/" }
+    ],
+    "category": "Action / Arcade",
+    "controls": "Arrow keys or WASD to run and jump, Spacebar to jump higher, rotate screen gravity",
+    "isPlaceholder": false
   },
   {
     "id": "empty_slot_2",

@@ -1,6 +1,6 @@
 {
-  "name": "Polybackup",
-  "description": "A minimalistic unblocked games portal featuring PolyTrack and request channels.",
+  "name": "Physics4Students",
+  "description": "An interactive physics learning portal for high school and university students featuring simulators, formulas, and textbook references.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

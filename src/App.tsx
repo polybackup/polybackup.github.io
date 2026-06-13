@@ -5,6 +5,7 @@ import GamesPage from './components/GamesPage';
 import GamePlayer from './components/GamePlayer';
 import RequestForm from './components/RequestForm';
 import AnalyticsDashboard from './components/AnalyticsDashboard';
+import PhysicsPortal from './components/PhysicsPortal';
 import { ActiveScreen, Game } from './types';
 
 // Import our games list stored in JSON
@@ -39,10 +40,28 @@ export const trackTelemetryEvent = async (type: string, data: any) => {
 export default function App() {
   const [activeScreen, setScreen] = useState<ActiveScreen>('home');
   const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
+  
+  // Gatekeeper for Polybackup
+  const [isPolybackupUnlocked, setIsPolybackupUnlocked] = useState(() => {
+    return sessionStorage.getItem('polybackup_unlocked') === 'true';
+  });
+
+  const [isTeacherAuthed, setIsTeacherAuthed] = useState(() => {
+    return sessionStorage.getItem('physics4students_teacher_authed') === 'true';
+  });
   const [, startTransition] = useTransition();
 
-  // Cast games list correctly
-  const games: Game[] = gamesData as Game[];
+  const [games, setGames] = useState<Game[]>(() => {
+    const saved = localStorage.getItem('polybackup_custom_games');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error('Failed to parse cached games list', e);
+      }
+    }
+    return gamesData as Game[];
+  });
 
   // Bootstrap session and log initial pageview
   useEffect(() => {
@@ -56,8 +75,10 @@ export default function App() {
 
   // Track screen transitions dynamically
   useEffect(() => {
-    trackTelemetryEvent('pageview', { screen: activeScreen });
-  }, [activeScreen]);
+    if (isPolybackupUnlocked) {
+      trackTelemetryEvent('pageview', { screen: activeScreen });
+    }
+  }, [activeScreen, isPolybackupUnlocked]);
 
   // Select game launcher with telemetry dispatch
   const handleSelectGame = (gameId: string) => {
@@ -89,6 +110,18 @@ export default function App() {
   // Find active playing game
   const activeGame = games.find(g => g.id === selectedGameId);
 
+  // If the portal is NOT unlocked, we only show the harmless, beautiful scholastic encyclopedia
+  if (!isPolybackupUnlocked) {
+    return (
+      <PhysicsPortal 
+        onUnlockPolybackup={() => {
+          setIsPolybackupUnlocked(true);
+          sessionStorage.setItem('polybackup_unlocked', 'true');
+        }} 
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#050505] text-zinc-100 font-sans antialiased overflow-x-hidden">
       {/* 
@@ -100,6 +133,15 @@ export default function App() {
           activeScreen={activeScreen} 
           setScreen={handleSetScreen} 
           setSelectedGameId={setSelectedGameId}
+          isTeacherAuthed={isTeacherAuthed}
+          setIsTeacherAuthed={setIsTeacherAuthed}
+          onLockPortal={() => {
+            setIsPolybackupUnlocked(false);
+            sessionStorage.removeItem('polybackup_unlocked');
+            setIsTeacherAuthed(false);
+            sessionStorage.removeItem('physics4students_teacher_authed');
+            handleSetScreen('home');
+          }}
         />
       )}
 
@@ -122,7 +164,13 @@ export default function App() {
         )}
 
         {activeScreen === 'analytics' && (
-          <AnalyticsDashboard />
+          <AnalyticsDashboard 
+            games={games}
+            onUpdateGames={(updatedGames) => {
+              setGames(updatedGames);
+              localStorage.setItem('polybackup_custom_games', JSON.stringify(updatedGames));
+            }}
+          />
         )}
 
         {activeScreen === 'player' && activeGame ? (
@@ -132,7 +180,7 @@ export default function App() {
           />
         ) : activeScreen === 'player' ? (
           <div className="h-screen bg-black flex flex-col items-center justify-center space-y-4">
-            <p className="font-mono text-xs text-rose-500 uppercase">Error: Game reference lost</p>
+            <p className="font-mono text-xs text-rose-550 uppercase">Error: Game reference lost</p>
             <button 
               onClick={() => handleSetScreen('games')}
               className="px-4 py-2 bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300 rounded cursor-pointer"

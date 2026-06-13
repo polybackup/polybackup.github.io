@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { Game } from '../types';
 import { Play, Calendar, Lock, ArrowUpRight, Search } from 'lucide-react';
 import { useState } from 'react';
@@ -31,7 +30,7 @@ export default function GamesPage({ games, onSelectGame, onRequestClick }: Games
     <div className="relative min-h-[calc(100vh-4rem)] py-12 px-6 bg-[#050505] overflow-hidden">
       {/* Background Mesh */}
       <div className="bg-mesh" />
-      <div className="absolute inset-0 bg-grid opacity-30 pointers-events-none" />
+      <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto space-y-10 relative z-10">
         
@@ -46,7 +45,7 @@ export default function GamesPage({ games, onSelectGame, onRequestClick }: Games
             </h2>
           </div>
           <p className="max-w-xs text-xs text-slate-500 font-mono tracking-wide leading-relaxed uppercase">
-            // Showing 1 of {games.length} Active Titles
+            // Showing {games.filter(g => !g.isPlaceholder).length} of {games.length} Active Titles
           </p>
         </div>
 
@@ -177,11 +176,11 @@ export default function GamesPage({ games, onSelectGame, onRequestClick }: Games
                   {/* Play Action Overlay matching Sleek design */}
                   <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
                     <div className="w-12 h-12 bg-blue-600 hover:bg-blue-500 rounded-full flex items-center justify-center text-white transition-all transform duration-300 group-hover:scale-110 shadow-[0_0_15px_rgba(59,130,246,0.5)]">
-                      <svg className="w-5 h-5 text-white fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                      <Play className="w-5 h-5 text-white fill-current ml-0.5" />
                     </div>
                   </div>
                   
-                  <div className="absolute top-3 right-3 px-2 py-0.5 rounded-md bg--[#050505]/80 border border-slate-800 text-brand-blue font-mono text-[9px] uppercase tracking-wider z-20">
+                  <div className="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-[#050505]/80 border border-slate-800 text-brand-blue font-mono text-[9px] uppercase tracking-wider z-20">
                     ACTIVE
                   </div>
                 </button>

@@ -9,7 +9,6 @@ interface HomeProps {
 export default function Home({ setScreen }: HomeProps) {
   // Staggered Container animations
   const containerVariants = {
-    hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
@@ -28,7 +27,7 @@ export default function Home({ setScreen }: HomeProps) {
     <div className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12 px-6 bg-[#050505] overflow-hidden">
       {/* Sleek Theme Background Mesh Gradient */}
       <div className="bg-mesh" />
-      <div className="absolute inset-0 bg-grid opacity-30 pointers-events-none" />
+      <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
 
       <motion.div 
         variants={containerVariants}
@@ -40,7 +39,7 @@ export default function Home({ setScreen }: HomeProps) {
         <motion.div variants={itemVariants} className="space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/30 border border-blue-900/35 text-brand-blue font-mono text-xs uppercase tracking-widest">
             <Zap className="w-3 h-3 animate-pulse text-blue-400" />
-            UNBLOCKED ACCESS PORT
+            OFFLINE PERSISTENCE ACTIVE
           </div>
           
           <h1 className="font-display font-black text-5xl sm:text-7xl tracking-tight text-white uppercase select-none">
@@ -78,7 +77,7 @@ export default function Home({ setScreen }: HomeProps) {
             </span>
           </button>
 
-          {/* Card 2: Request Port */}
+          {/* Card 2: Request */}
           <button
             onClick={() => setScreen('request')}
             className="group relative flex flex-col items-start text-left p-6 sm:p-8 col-span-1 rounded-2xl bg-[#111111] border border-slate-900 hover:border-blue-500/50 transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.6)] cursor-pointer"
@@ -107,11 +106,11 @@ export default function Home({ setScreen }: HomeProps) {
         >
           <div className="flex items-center gap-2">
             <Activity className="w-3.5 h-3.5 text-blue-500/70" />
-            <span>CORE NODE: <strong className="text-zinc-300 font-medium">S-TIER SPEED</strong></span>
+            <span>SERVER LOAD: <strong className="text-zinc-300 font-medium">MINIMAL</strong></span>
           </div>
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-3.5 h-3.5 text-blue-500/70" />
-            <span>SECURE SANDBOX WORKSPACE</span>
+            <span>ENCRYPTED LOCAL STORAGE</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
